@@ -290,13 +290,6 @@
             will-change: transform, opacity, filter, clip-path;
         }
 
-        .product-card.is-hidden {
-            opacity: 0;
-            transform: translateY(42px) scale(0.94);
-            filter: blur(4px);
-            clip-path: inset(0 100% 0 0);
-        }
-
         .product-card.is-visible {
             opacity: 1;
             transform: translateY(0) scale(1);
@@ -1312,7 +1305,6 @@
 
         function resetProductCard(card) {
             card.classList.remove('is-visible', 'product-build-in');
-            card.classList.add('is-hidden');
             card.dataset.productVisible = 'false';
         }
 
@@ -1320,7 +1312,6 @@
             window.setTimeout(() => {
                 if (card.dataset.productVisible !== 'true') return;
                 card.classList.remove('product-build-in');
-                card.classList.remove('is-hidden');
                 card.classList.add('is-visible');
                 void card.offsetWidth;
                 card.classList.add('product-build-in');
@@ -1343,7 +1334,7 @@
 
         if (productCards.length) {
             productCards.forEach(card => {
-                resetProductCard(card);
+                card.dataset.productVisible = 'false';
                 card.addEventListener('animationend', () => {
                     card.classList.remove('product-build-in');
                 });
