@@ -206,6 +206,76 @@
             }
         }
 
+        .experience-card {
+            opacity: 0;
+            filter: blur(5px);
+            will-change: transform, opacity, filter;
+        }
+
+        .experience-card.from-left {
+            transform: translateX(-120px) rotate(-1.4deg);
+        }
+
+        .experience-card.from-right {
+            transform: translateX(120px) rotate(1.4deg);
+        }
+
+        .experience-card.is-visible {
+            opacity: 1;
+            transform: translateX(0) rotate(0deg);
+            filter: blur(0);
+        }
+
+        .experience-card.slide-left-in {
+            animation: experience-slide-left-in 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        .experience-card.slide-right-in {
+            animation: experience-slide-right-in 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        @keyframes experience-slide-left-in {
+            0% {
+                opacity: 0;
+                transform: translateX(-130px) rotate(-2deg);
+                filter: blur(6px);
+            }
+            58% {
+                opacity: 1;
+                transform: translateX(18px) rotate(0.6deg);
+                filter: blur(0);
+            }
+            78% {
+                transform: translateX(-6px) rotate(-0.2deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) rotate(0deg);
+                filter: blur(0);
+            }
+        }
+
+        @keyframes experience-slide-right-in {
+            0% {
+                opacity: 0;
+                transform: translateX(130px) rotate(2deg);
+                filter: blur(6px);
+            }
+            58% {
+                opacity: 1;
+                transform: translateX(-18px) rotate(-0.6deg);
+                filter: blur(0);
+            }
+            78% {
+                transform: translateX(6px) rotate(0.2deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) rotate(0deg);
+                filter: blur(0);
+            }
+        }
+
         .academic-bg {
             background-color: #FAF6EE;
             background-image:
@@ -473,7 +543,7 @@
             <div class="relative pl-6 md:pl-10 border-l-2 border-dashed border-retro-charcoal/60 space-y-12 ml-1 md:ml-4">
                 
                 <!-- Role 1: Norm Holding -->
-                <div class="relative">
+                <div class="experience-card from-left relative">
                     <!-- Timeline Node Pin -->
                     <span class="absolute -left-[31px] md:-left-[49px] top-4 w-4 h-4 rounded-full bg-retro-red border-2 border-retro-charcoal flex items-center justify-center shadow-sm">
                         <span class="w-1.5 h-1.5 rounded-full bg-[#FAF6EE]"></span>
@@ -520,7 +590,7 @@
                 </div>
 
                 <!-- Role 2: OverBlock Web 3 Office -->
-                <div class="relative">
+                <div class="experience-card from-right relative">
                     <!-- Timeline Node Pin -->
                     <span class="absolute -left-[31px] md:-left-[49px] top-4 w-4 h-4 rounded-full bg-retro-teal border-2 border-retro-charcoal flex items-center justify-center shadow-sm">
                         <span class="w-1.5 h-1.5 rounded-full bg-[#FAF6EE]"></span>
@@ -562,7 +632,7 @@
                 </div>
 
                 <!-- Role 3: Solana All Stars Türkiye -->
-                <div class="relative">
+                <div class="experience-card from-left relative">
                     <!-- Timeline Node Pin -->
                     <span class="absolute -left-[31px] md:-left-[49px] top-4 w-4 h-4 rounded-full bg-retro-gold border-2 border-retro-charcoal flex items-center justify-center shadow-sm">
                         <span class="w-1.5 h-1.5 rounded-full bg-[#FAF6EE]"></span>
@@ -1132,7 +1202,51 @@
             educationCards.forEach(card => eduObserver.observe(card));
         }
 
-        // 4. Direction-aware Hackathon Card Entrance
+        // 4. Direction-aware Experience Card Entrance
+        const experienceCards = Array.from(document.querySelectorAll('#experience .experience-card'));
+
+        function resetExperienceCard(card) {
+            card.classList.remove('is-visible', 'slide-left-in', 'slide-right-in');
+            card.dataset.experienceVisible = 'false';
+        }
+
+        function animateExperienceCard(card) {
+            if (card.dataset.experienceVisible !== 'true') return;
+            const animationClass = card.classList.contains('from-right') ? 'slide-right-in' : 'slide-left-in';
+            card.classList.remove('slide-left-in', 'slide-right-in');
+            card.classList.add('is-visible');
+            void card.offsetWidth;
+            card.classList.add(animationClass);
+        }
+
+        if (experienceCards.length) {
+            experienceCards.forEach(card => {
+                resetExperienceCard(card);
+                card.addEventListener('animationend', () => {
+                    card.classList.remove('slide-left-in', 'slide-right-in');
+                });
+            });
+
+            const experienceObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const card = entry.target;
+                    if (entry.isIntersecting) {
+                        if (card.dataset.experienceVisible === 'true') return;
+                        card.dataset.experienceVisible = 'true';
+                        animateExperienceCard(card);
+                    } else {
+                        resetExperienceCard(card);
+                    }
+                });
+            }, {
+                threshold: 0.22,
+                rootMargin: '-12% 0px -22% 0px'
+            });
+
+            experienceCards.forEach(card => experienceObserver.observe(card));
+        }
+
+        // 5. Direction-aware Hackathon Card Entrance
         const hackathonCards = Array.from(document.querySelectorAll('#hackathons .hackathon-card'));
         let hackathonAnimationQueue = [];
         let hackathonAnimationFrame = null;
