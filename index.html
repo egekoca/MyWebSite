@@ -135,6 +135,77 @@
             }
         }
 
+        .hackathon-card {
+            opacity: 0;
+            transform: translateY(-130px) scale(0.86) rotate(-3deg);
+            filter: blur(5px);
+            will-change: transform, opacity, filter;
+        }
+
+        .hackathon-card.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1) rotate(0deg);
+            filter: blur(0);
+        }
+
+        .hackathon-card.drop-in {
+            animation: hackathon-drop-in 1.05s cubic-bezier(0.17, 0.9, 0.28, 1.18) both;
+        }
+
+        .hackathon-card.rise-in {
+            animation: hackathon-rise-in 1.05s cubic-bezier(0.17, 0.9, 0.28, 1.18) both;
+        }
+
+        @keyframes hackathon-drop-in {
+            0% {
+                opacity: 0;
+                transform: translateY(-150px) scale(0.84) rotate(-4deg);
+                filter: blur(6px);
+                box-shadow: 0 22px 0 rgba(45, 39, 34, 0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(18px) scale(1.045) rotate(1.4deg);
+                filter: blur(0);
+                box-shadow: 12px 12px 0 #2D2722;
+            }
+            72% {
+                transform: translateY(-8px) scale(0.985) rotate(-0.45deg);
+                box-shadow: 6px 6px 0 #2D2722;
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1) rotate(0deg);
+                filter: blur(0);
+                box-shadow: 8px 8px 0 #2D2722;
+            }
+        }
+
+        @keyframes hackathon-rise-in {
+            0% {
+                opacity: 0;
+                transform: translateY(150px) scale(0.84) rotate(4deg);
+                filter: blur(6px);
+                box-shadow: 0 -18px 0 rgba(45, 39, 34, 0);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-18px) scale(1.045) rotate(-1.4deg);
+                filter: blur(0);
+                box-shadow: 12px 12px 0 #2D2722;
+            }
+            72% {
+                transform: translateY(8px) scale(0.985) rotate(0.45deg);
+                box-shadow: 6px 6px 0 #2D2722;
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1) rotate(0deg);
+                filter: blur(0);
+                box-shadow: 8px 8px 0 #2D2722;
+            }
+        }
+
         .academic-bg {
             background-color: #FAF6EE;
             background-image:
@@ -559,7 +630,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 
                 <!-- Stamp 1: Taiko -->
-                <div class="bg-[#FAF6EE] border-4 border-retro-charcoal p-5 sm:p-6 relative group flex flex-col justify-between vintage-shadow-lg overflow-hidden min-h-[350px] sm:min-h-[380px] hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[10px_10px_0px_0px_#2D2722] transition-all">
+                <div class="hackathon-card bg-[#FAF6EE] border-4 border-retro-charcoal p-5 sm:p-6 relative group flex flex-col justify-between vintage-shadow-lg overflow-hidden min-h-[350px] sm:min-h-[380px] hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[10px_10px_0px_0px_#2D2722] transition-all">
                     <!-- Ticket notched corners simulation using absolute markers -->
                     <span class="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-[#F5EFE4] border border-retro-charcoal z-20"></span>
                     <span class="absolute -bottom-2 -right-2 w-4 h-4 rounded-full bg-[#F5EFE4] border border-retro-charcoal z-20"></span>
@@ -613,7 +684,7 @@
                 </div>
 
                 <!-- Stamp 2: Sui Bootcamp -->
-                <div class="bg-[#FAF6EE] border-4 border-retro-charcoal p-6 relative group flex flex-col justify-between vintage-shadow-lg overflow-hidden min-h-[350px] sm:min-h-[380px] hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[10px_10px_0px_0px_#2D2722] transition-all">
+                <div class="hackathon-card bg-[#FAF6EE] border-4 border-retro-charcoal p-6 relative group flex flex-col justify-between vintage-shadow-lg overflow-hidden min-h-[350px] sm:min-h-[380px] hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[10px_10px_0px_0px_#2D2722] transition-all">
                     <span class="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-[#F5EFE4] border border-retro-charcoal z-20"></span>
                     <span class="absolute -bottom-2 -right-2 w-4 h-4 rounded-full bg-[#F5EFE4] border border-retro-charcoal z-20"></span>
                     
@@ -655,7 +726,7 @@
                 </div>
 
                 <!-- Stamp 3: Sui x 42 TR -->
-                <div class="bg-[#FAF6EE] border-4 border-retro-charcoal p-6 relative group flex flex-col justify-between vintage-shadow-lg overflow-hidden min-h-[350px] sm:min-h-[380px] hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[10px_10px_0px_0px_#2D2722] transition-all">
+                <div class="hackathon-card bg-[#FAF6EE] border-4 border-retro-charcoal p-6 relative group flex flex-col justify-between vintage-shadow-lg overflow-hidden min-h-[350px] sm:min-h-[380px] hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[10px_10px_0px_0px_#2D2722] transition-all">
                     <span class="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-[#F5EFE4] border border-retro-charcoal z-20"></span>
                     <span class="absolute -bottom-2 -right-2 w-4 h-4 rounded-full bg-[#F5EFE4] border border-retro-charcoal z-20"></span>
                     
@@ -697,7 +768,7 @@
                 </div>
 
                 <!-- Stamp 4: Monad Foundation -->
-                <div class="bg-[#FAF6EE] border-4 border-retro-charcoal p-6 relative group flex flex-col justify-between vintage-shadow-lg overflow-hidden min-h-[350px] sm:min-h-[380px] hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[10px_10px_0px_0px_#2D2722] transition-all">
+                <div class="hackathon-card bg-[#FAF6EE] border-4 border-retro-charcoal p-6 relative group flex flex-col justify-between vintage-shadow-lg overflow-hidden min-h-[350px] sm:min-h-[380px] hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[10px_10px_0px_0px_#2D2722] transition-all">
                     <span class="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-[#F5EFE4] border border-retro-charcoal z-20"></span>
                     <span class="absolute -bottom-2 -right-2 w-4 h-4 rounded-full bg-[#F5EFE4] border border-retro-charcoal z-20"></span>
                     
@@ -1059,6 +1130,71 @@
             });
 
             educationCards.forEach(card => eduObserver.observe(card));
+        }
+
+        // 4. Direction-aware Hackathon Card Entrance
+        const hackathonCards = Array.from(document.querySelectorAll('#hackathons .hackathon-card'));
+        let hackathonAnimationQueue = [];
+        let hackathonAnimationFrame = null;
+
+        function resetHackathonCard(card) {
+            card.classList.remove('is-visible', 'drop-in', 'rise-in');
+            card.dataset.hackathonVisible = 'false';
+        }
+
+        function animateHackathonCard(card, delay = 0) {
+            window.setTimeout(() => {
+                if (card.dataset.hackathonVisible !== 'true') return;
+                const animationClass = scrollDirection === 'down' ? 'drop-in' : 'rise-in';
+                card.classList.remove('drop-in', 'rise-in');
+                card.classList.add('is-visible');
+                void card.offsetWidth;
+                card.classList.add(animationClass);
+            }, delay);
+        }
+
+        function flushHackathonAnimationQueue() {
+            const cardsToAnimate = [...new Set(hackathonAnimationQueue)];
+            hackathonAnimationQueue = [];
+            hackathonAnimationFrame = null;
+
+            cardsToAnimate
+                .sort((a, b) => {
+                    const aIndex = hackathonCards.indexOf(a);
+                    const bIndex = hackathonCards.indexOf(b);
+                    return scrollDirection === 'down' ? aIndex - bIndex : bIndex - aIndex;
+                })
+                .forEach((card, index) => animateHackathonCard(card, index * 155));
+        }
+
+        if (hackathonCards.length) {
+            hackathonCards.forEach(card => {
+                resetHackathonCard(card);
+                card.addEventListener('animationend', () => {
+                    card.classList.remove('drop-in', 'rise-in');
+                });
+            });
+
+            const hackathonObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const card = entry.target;
+                    if (entry.isIntersecting) {
+                        if (card.dataset.hackathonVisible === 'true') return;
+                        card.dataset.hackathonVisible = 'true';
+                        hackathonAnimationQueue.push(card);
+                        if (!hackathonAnimationFrame) {
+                            hackathonAnimationFrame = requestAnimationFrame(flushHackathonAnimationQueue);
+                        }
+                    } else {
+                        resetHackathonCard(card);
+                    }
+                });
+            }, {
+                threshold: 0.16,
+                rootMargin: '-12% 0px -24% 0px'
+            });
+
+            hackathonCards.forEach(card => hackathonObserver.observe(card));
         }
 
         // Scroll Spy Nav Indicator
