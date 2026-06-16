@@ -283,11 +283,18 @@
         }
 
         .product-card {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+            clip-path: inset(0 0 0 0);
+            will-change: transform, opacity, filter, clip-path;
+        }
+
+        .product-card.is-hidden {
             opacity: 0;
             transform: translateY(42px) scale(0.94);
             filter: blur(4px);
             clip-path: inset(0 100% 0 0);
-            will-change: transform, opacity, filter, clip-path;
         }
 
         .product-card.is-visible {
@@ -715,11 +722,11 @@
                         <ul class="space-y-3 text-xs sm:text-sm text-retro-charcoal/90">
                             <li class="flex items-start gap-3">
                                 <span class="text-retro-red mt-0.5 shrink-0">✦</span>
-                                <span>Conducted extensive blockchain technical training sessions and seminars across more than 10 cities in the Aegean region.</span>
+                                <span>Conducted extensive blockchain technical training sessions and <b>seminars across more than 10 cities</b> in the Aegean region.</span>
                             </li>
                             <li class="flex items-start gap-3">
                                 <span class="text-retro-red mt-0.5 shrink-0">✦</span>
-                                <span>Organized regional community meetups and developer workshops to accelerate the growth of the Solana ecosystem in Türkiye.</span>
+                                <span>Organized regional <b>community meetups and developer workshops</b> to accelerate the growth of the Solana ecosystem in Türkiye.</span>
                             </li>
                         </ul>
                     </div>
@@ -1305,6 +1312,7 @@
 
         function resetProductCard(card) {
             card.classList.remove('is-visible', 'product-build-in');
+            card.classList.add('is-hidden');
             card.dataset.productVisible = 'false';
         }
 
@@ -1312,6 +1320,7 @@
             window.setTimeout(() => {
                 if (card.dataset.productVisible !== 'true') return;
                 card.classList.remove('product-build-in');
+                card.classList.remove('is-hidden');
                 card.classList.add('is-visible');
                 void card.offsetWidth;
                 card.classList.add('product-build-in');
