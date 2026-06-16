@@ -282,48 +282,6 @@
             }
         }
 
-        .product-card {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            filter: blur(0);
-            will-change: transform, opacity, filter;
-        }
-
-        .product-card.is-visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            filter: blur(0);
-        }
-
-        .product-card.product-stamp-in {
-            animation: product-soft-stamp-in 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
-        }
-
-        @keyframes product-soft-stamp-in {
-            0% {
-                opacity: 0;
-                transform: translateY(38px) scale(0.96) rotate(-0.5deg);
-                filter: blur(2px);
-                box-shadow: 1px 1px 0 rgba(45, 39, 34, 0);
-            }
-            52% {
-                opacity: 1;
-                transform: translateY(-7px) scale(1.01) rotate(0.25deg);
-                filter: blur(0);
-                box-shadow: 7px 7px 0 #2D2722;
-            }
-            76% {
-                transform: translateY(3px) scale(0.995) rotate(-0.1deg);
-                box-shadow: 4px 4px 0 #2D2722;
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1) rotate(0deg);
-                filter: blur(0);
-                box-shadow: 5px 5px 0 #2D2722;
-            }
-        }
-
         .academic-bg {
             background-color: #FAF6EE;
             background-image:
@@ -946,7 +904,7 @@
             <div class="space-y-8">
                 
                 <!-- Project 1: SomiVerse -->
-                <div class="product-card bg-[#FAF6EE] border-2 border-retro-charcoal p-5 sm:p-6 md:p-8 vintage-shadow flex flex-col md:flex-row items-start gap-6 relative">
+                <div class="bg-[#FAF6EE] border-2 border-retro-charcoal p-5 sm:p-6 md:p-8 vintage-shadow flex flex-col md:flex-row items-start gap-6 relative">
                     
                     <!-- Polaroid Style Avatar Box (Upload-Ready with Live URL) -->
                     <div class="relative w-20 h-24 bg-[#FAF6EE] border-2 border-retro-charcoal p-1.5 flex flex-col justify-between shrink-0 shadow-sm">
@@ -984,7 +942,7 @@
                 </div>
 
                 <!-- Project 2: ProjeFest AI -->
-                <div class="product-card bg-[#FAF6EE] border-2 border-retro-charcoal p-5 sm:p-6 md:p-8 vintage-shadow flex flex-col md:flex-row items-start gap-6 relative">
+                <div class="bg-[#FAF6EE] border-2 border-retro-charcoal p-5 sm:p-6 md:p-8 vintage-shadow flex flex-col md:flex-row items-start gap-6 relative">
                     
                     <!-- Polaroid Style Avatar Box (Upload-Ready with Live URL) -->
                     <div class="relative w-20 h-24 bg-[#FAF6EE] border-2 border-retro-charcoal p-1.5 flex flex-col justify-between shrink-0 shadow-sm">
@@ -1035,7 +993,7 @@
                 </div>
 
                 <!-- Project 3: Dam Tracking (Baraj Takip) -->
-                <div class="product-card bg-[#FAF6EE] border-2 border-retro-charcoal p-5 sm:p-6 md:p-8 vintage-shadow flex flex-col md:flex-row items-start gap-6 relative">
+                <div class="bg-[#FAF6EE] border-2 border-retro-charcoal p-5 sm:p-6 md:p-8 vintage-shadow flex flex-col md:flex-row items-start gap-6 relative">
                     
                     <!-- Polaroid Style Avatar Box (Upload-Ready with Live URL) -->
                     <div class="relative w-20 h-24 bg-[#FAF6EE] border-2 border-retro-charcoal p-1.5 flex flex-col justify-between shrink-0 shadow-sm">
@@ -1294,71 +1252,7 @@
             experienceCards.forEach(card => experienceObserver.observe(card));
         }
 
-        // 5. Soft Stamp Featured Product Cards
-        const productCards = Array.from(document.querySelectorAll('#projects .product-card'));
-        let productAnimationQueue = [];
-        let productAnimationFrame = null;
-
-        function resetProductCard(card) {
-            card.classList.remove('is-visible', 'product-stamp-in');
-            card.dataset.productVisible = 'false';
-        }
-
-        function animateProductCard(card, delay = 0) {
-            window.setTimeout(() => {
-                if (card.dataset.productVisible !== 'true') return;
-                card.classList.remove('product-stamp-in');
-                card.classList.add('is-visible');
-                void card.offsetWidth;
-                card.classList.add('product-stamp-in');
-            }, delay);
-        }
-
-        function flushProductAnimationQueue() {
-            const cardsToAnimate = [...new Set(productAnimationQueue)];
-            productAnimationQueue = [];
-            productAnimationFrame = null;
-
-            cardsToAnimate
-                .sort((a, b) => {
-                    const aIndex = productCards.indexOf(a);
-                    const bIndex = productCards.indexOf(b);
-                    return scrollDirection === 'down' ? aIndex - bIndex : bIndex - aIndex;
-                })
-                .forEach((card, index) => animateProductCard(card, index * 190));
-        }
-
-        if (productCards.length) {
-            productCards.forEach(card => {
-                card.dataset.productVisible = 'false';
-                card.addEventListener('animationend', () => {
-                    card.classList.remove('product-stamp-in');
-                });
-            });
-
-            const productObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    const card = entry.target;
-                    if (entry.isIntersecting) {
-                        if (card.dataset.productVisible === 'true') return;
-                        card.dataset.productVisible = 'true';
-                        productAnimationQueue.push(card);
-                        if (!productAnimationFrame) {
-                            productAnimationFrame = requestAnimationFrame(flushProductAnimationQueue);
-                        }
-                    } else {
-                        resetProductCard(card);
-                    }
-                });
-            }, {
-                threshold: 0.2,
-                rootMargin: '-12% 0px -24% 0px'
-            });
-
-            productCards.forEach(card => productObserver.observe(card));
-        }
-
-        // 6. Direction-aware Hackathon Card Entrance
+        // 5. Direction-aware Hackathon Card Entrance
         const hackathonCards = Array.from(document.querySelectorAll('#hackathons .hackathon-card'));
         let hackathonAnimationQueue = [];
         let hackathonAnimationFrame = null;
