@@ -96,6 +96,44 @@
         .edu-card-transition {
             transition: transform 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.15), opacity 0.55s ease-out, box-shadow 0.3s ease;
         }
+
+        .academic-bg {
+            background-color: #FAF6EE;
+            background-image:
+                linear-gradient(rgba(45, 39, 34, 0.055) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(45, 39, 34, 0.045) 1px, transparent 1px),
+                radial-gradient(circle at 18% 18%, rgba(185, 58, 37, 0.12) 0 1px, transparent 1.5px),
+                radial-gradient(circle at 82% 28%, rgba(36, 66, 68, 0.12) 0 1px, transparent 1.5px);
+            background-size: 100% 34px, 34px 100%, 18px 18px, 22px 22px;
+        }
+
+        .academic-bg::before,
+        .academic-bg::after {
+            content: "";
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .academic-bg::before {
+            inset: 26px;
+            border: 2px dashed rgba(45, 39, 34, 0.18);
+            box-shadow: inset 0 0 0 8px rgba(197, 155, 39, 0.06);
+        }
+
+        .academic-bg::after {
+            content: "ACADEMIC";
+            right: -3vw;
+            bottom: 4vh;
+            font-family: 'Fraunces', serif;
+            font-size: clamp(4rem, 13vw, 11rem);
+            font-weight: 900;
+            line-height: 1;
+            color: rgba(45, 39, 34, 0.055);
+            transform: rotate(-7deg);
+            letter-spacing: 0;
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-[#B93A25] selection:text-white">
@@ -194,8 +232,8 @@
     </section>
 
     <!-- 2. EDUCATION SECTION (Stacked Symmetrical Layout - Scrollable/No Clip on Accordion Expansion) -->
-    <section id="education" class="relative min-h-screen py-20 px-4 sm:px-6 border-t-2 border-retro-charcoal z-10 bg-[#FAF6EE]">
-        <div class="max-w-4xl mx-auto w-full">
+    <section id="education" class="academic-bg relative min-h-screen py-20 px-4 sm:px-6 border-t-2 border-retro-charcoal z-10 overflow-hidden">
+        <div class="relative z-10 max-w-4xl mx-auto w-full">
             <div class="text-center mb-10">
                 <span class="text-xs font-serif font-black tracking-widest text-retro-red uppercase">SECTION 01 // SCHOLASTIC JOURNEY</span>
                 <h2 class="font-serif font-black text-3xl md:text-5xl text-retro-charcoal mt-2 uppercase tracking-tight">Academic Foundations</h2>
