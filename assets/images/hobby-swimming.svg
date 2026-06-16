@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="title desc">
+  <title id="title">Swimming illustration</title>
+  <desc id="desc">A retro swimming lane with waves and a swimmer icon.</desc>
+  <rect width="640" height="420" fill="#FAF6EE"/>
+  <rect x="58" y="56" width="524" height="306" rx="18" fill="#D9ECE7" stroke="#2D2722" stroke-width="8"/>
+  <g fill="none" stroke="#244244" stroke-width="8" stroke-linecap="round">
+    <path d="M92 276c34-28 68-28 102 0s68 28 102 0 68-28 102 0 68 28 102 0 68-28 102 0"/>
+    <path d="M92 318c34-28 68-28 102 0s68 28 102 0 68-28 102 0 68 28 102 0 68-28 102 0"/>
+  </g>
+  <g stroke="#2D2722" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="286" cy="132" r="28" fill="#B93A25"/>
+    <path d="M320 154c48 14 82 42 108 78" fill="none"/>
+    <path d="M262 178c-36 32-78 48-132 48" fill="none"/>
+    <path d="M320 154c-34 22-66 42-98 72" fill="none"/>
+  </g>
+  <path d="M102 92H538" stroke="#C59B27" stroke-width="6" stroke-dasharray="18 12"/>
+  <path d="M102 374H538" stroke="#2D2722" stroke-width="4" stroke-dasharray="12 9"/>
+  <g fill="#244244" font-family="Georgia, serif" font-weight="900" text-anchor="middle">
+    <text x="320" y="404" font-size="22">SWIM LANE</text>
+  </g>
+</svg>
