@@ -96,28 +96,36 @@
         .edu-card-transition {
             will-change: transform, opacity, filter;
             transform-origin: center top;
+            opacity: 0;
+            transform: translateY(120px) scale(0.78) rotate(-3deg);
+            filter: blur(5px);
         }
 
         .edu-card-visible {
-            animation: edu-stamp-in 0.82s cubic-bezier(0.16, 1, 0.3, 1) both;
+            animation: edu-stamp-in 1.18s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
         @keyframes edu-stamp-in {
             0% {
                 opacity: 0;
-                transform: translateY(72px) scale(0.86) rotate(-2deg);
-                filter: blur(3px);
+                transform: translateY(120px) scale(0.78) rotate(-3deg);
+                filter: blur(5px);
                 box-shadow: 18px 18px 0 0 rgba(45, 39, 34, 0);
             }
-            52% {
+            38% {
                 opacity: 1;
-                transform: translateY(-12px) scale(1.035) rotate(1deg);
-                filter: blur(0);
-                box-shadow: 11px 11px 0 0 #2D2722;
+                transform: translateY(-22px) scale(1.06) rotate(1.6deg);
+                filter: blur(0.5px);
+                box-shadow: 14px 14px 0 0 #2D2722;
             }
-            72% {
-                transform: translateY(5px) scale(0.985) rotate(-0.4deg);
-                box-shadow: 4px 4px 0 0 #2D2722;
+            56% {
+                transform: translateY(10px) scale(0.965) rotate(-0.9deg);
+                filter: blur(0);
+                box-shadow: 3px 3px 0 0 #2D2722;
+            }
+            74% {
+                transform: translateY(-6px) scale(1.015) rotate(0.35deg);
+                box-shadow: 8px 8px 0 0 #2D2722;
             }
             100% {
                 opacity: 1;
@@ -1002,13 +1010,13 @@
 
         function resetEducationCard(card) {
             card.classList.remove('edu-card-visible');
-            card.classList.add('opacity-0', 'translate-y-12', 'scale-95');
+            card.dataset.eduVisible = 'false';
         }
 
         function animateEducationCard(card, delay = 0) {
             window.setTimeout(() => {
+                if (card.dataset.eduVisible !== 'true') return;
                 card.classList.remove('edu-card-visible');
-                card.classList.remove('opacity-0', 'translate-y-12', 'scale-95');
                 void card.offsetWidth;
                 card.classList.add('edu-card-visible');
             }, delay);
@@ -1035,6 +1043,8 @@
                 entries.forEach(entry => {
                     const card = entry.target;
                     if (entry.isIntersecting) {
+                        if (card.dataset.eduVisible === 'true') return;
+                        card.dataset.eduVisible = 'true';
                         educationAnimationQueue.push(card);
                         if (!educationAnimationFrame) {
                             educationAnimationFrame = requestAnimationFrame(flushEducationAnimationQueue);
@@ -1044,8 +1054,8 @@
                     }
                 });
             }, {
-                threshold: 0.38,
-                rootMargin: '-8% 0px -8% 0px'
+                threshold: 0.18,
+                rootMargin: '-18% 0px -32% 0px'
             });
 
             educationCards.forEach(card => eduObserver.observe(card));
